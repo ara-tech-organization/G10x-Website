@@ -46,14 +46,12 @@
       })()
     </script>
 
-    <!-- Title and meta are owned by <SeoHead>; React 19 hoists them into
-         head at runtime. These are the crawl-time fallbacks. -->
-    <title>Digital Marketing Company in Thanjavur | G10X Private Limited</title>
-    <meta
-      name="description"
-      content="Looking for a trusted Digital Marketing Company in Thanjavur? G10X Private Limited offers SEO, social media, branding, web design, and digital marketing solutions."
-    />
-    <link rel="canonical" href="https://g10x.co/" />
+    <!-- Title, description, canonical, Open Graph, Twitter and geo tags are
+         injected here at build time by the `g10x-head-meta` plugin in
+         vite.config.js, sourced from src/content/site.js. They are deliberately
+         not written by hand: social scrapers do not run JS, so they have to be
+         in the served payload, and duplicating them here would emit each tag
+         twice. -->
   </head>
   <body>
     <div id="root"></div>

@@ -41,6 +41,11 @@ export const seo = {
   description:
     'Looking for a trusted Digital Marketing Company in Thanjavur? G10X Private Limited offers SEO, social media, branding, web design, and digital marketing solutions.',
   canonical: 'https://g10x.co/',
+  // Share card. Absolute per the OG spec — relative paths are rejected by
+  // most scrapers. Regenerate with `npm run make:og`.
+  ogImage: 'https://g10x.co/og-image.png',
+  ogImageAlt:
+    'G10X Private Limited — digital marketing company in Thanjavur',
   // All five keyword groups from the content document: primary, secondary,
   // long-tail, local and LSI — previously only primary + secondary shipped.
   keywords: [
@@ -526,7 +531,7 @@ export const contact = {
   heading: 'Let’s Start the Conversation',
   finalHeading: 'Ready to Put Your Business on the Map?',
   finalBody:
-    'Book a free, no-pressure strategy call and see exactly how G10X would grow your business online.',
+    'Book a free, no-pressure strategy call and see exactly how G10X would grow your business online — and why we are counted among the best digital marketing companies in Thanjavur.',
   ctas: [
     { label: 'Join Today', href: '#contact-form', primary: true },
     { label: 'Call +91 92807 01655', href: 'tel:+919280701655' },

@@ -1,14 +1,19 @@
 import { useEffect } from 'react'
 import { allSchemas } from '@/content/schema'
-import { company, seo } from '@/content/site'
 
 /**
- * Document head management.
+ * Structured data.
  *
- * React 19 hoists <title>, <meta> and <link> rendered anywhere in the tree
- * into <head>, so this component can simply return them — no helmet library,
- * no extra dependency. JSON-LD still goes through an effect, because React
- * treats <script> children as a hydration hazard and will not hoist them.
+ * The title/description/OG/Twitter/geo tags this component used to render are
+ * now stamped into index.html at build time by the `g10x-head-meta` plugin —
+ * link-preview scrapers do not execute JS, so React-hoisted og: tags never
+ * reached them. Emitting both would duplicate every tag, so nothing static is
+ * rendered here any more.
+ *
+ * JSON-LD stays on the client: Google renders JS before parsing structured
+ * data, and React treats <script> children as a hydration hazard and will not
+ * hoist them anyway. When per-route meta lands, this is where it belongs —
+ * mutating the existing tags rather than appending new ones.
  */
 export function SeoHead() {
   useEffect(() => {
@@ -29,34 +34,5 @@ export function SeoHead() {
     return () => node.remove()
   }, [])
 
-  return (
-    <>
-      <title>{seo.title}</title>
-      <meta name="description" content={seo.description} />
-      <meta name="keywords" content={seo.keywords} />
-      <link rel="canonical" href={seo.canonical} />
-      <meta name="robots" content="index, follow, max-image-preview:large" />
-      <meta name="author" content={company.name} />
-      <meta name="theme-color" content="#050814" />
-
-      {/* Open Graph */}
-      <meta property="og:type" content="website" />
-      <meta property="og:site_name" content={company.name} />
-      <meta property="og:title" content={seo.title} />
-      <meta property="og:description" content={seo.description} />
-      <meta property="og:url" content={seo.canonical} />
-      <meta property="og:locale" content="en_IN" />
-
-      {/* Twitter */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={seo.title} />
-      <meta name="twitter:description" content={seo.description} />
-
-      {/* Local signals */}
-      <meta name="geo.region" content="IN-TN" />
-      <meta name="geo.placename" content="Thanjavur" />
-      <meta name="geo.position" content="10.7905;79.1378" />
-      <meta name="ICBM" content="10.7905, 79.1378" />
-    </>
-  )
+  return null
 }
