@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!-- Paint the brand background before React mounts, so there is never a
+         white flash ahead of the ignition sequence. This stays dark for both
+         themes: the ignition curtain that covers the first paint is always
+         dark, so matching it here is correct regardless of the stored
+         preference — and it means the theme can never cause a flash. -->
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: #050814;
+        color: #fff;
+      }
+    </style>
+
+    <!-- Resolve the theme before first paint. Render-blocking on purpose and
+         kept inline: a deferred module would let React mount against the
+         default theme first and flash the wrong ground on toggle-back. -->
+    <script>
+      ;(function () {
+        var t = 'dark'
+        try {
+          var saved = localStorage.getItem('g10x-theme')
+          // Only an explicit choice wins. Absent one the site stays dark —
+          // it is the brand default and the ground the artwork is built for,
+          // so prefers-color-scheme is deliberately not consulted here.
+          if (saved === 'light' || saved === 'dark') t = saved
+        } catch (e) {
+          /* Safari private mode throws on localStorage; dark is the fallback. */
+        }
+        document.documentElement.setAttribute('data-theme', t)
+      })()
+    </script>
+
+    <!-- Title and meta are owned by <SeoHead>; React 19 hoists them into
+         head at runtime. These are the crawl-time fallbacks. -->
+    <title>Digital Marketing Company in Thanjavur | G10X Private Limited</title>
+    <meta
+      name="description"
+      content="Looking for a trusted Digital Marketing Company in Thanjavur? G10X Private Limited offers SEO, social media, branding, web design, and digital marketing solutions."
+    />
+    <link rel="canonical" href="https://g10x.co/" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

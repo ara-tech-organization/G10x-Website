@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7c2ff4"/>
+      <stop offset="55%" stop-color="#df4a94"/>
+      <stop offset="100%" stop-color="#f0655a"/>
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="22" fill="#050814"/>
+  <!-- The G ring, opened where the arrow exits, as in the master lockup. -->
+  <path d="M50 17a33 33 0 1 0 23.5 56.2" fill="none" stroke="url(#g)" stroke-width="13" stroke-linecap="round"/>
+  <!-- The arrow: forward movement, direction, speed. -->
+  <path d="M31 50 L73 32 L56 75 L50 55 Z" fill="url(#g)"/>
+</svg>
