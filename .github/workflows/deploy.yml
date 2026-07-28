@@ -25,7 +25,10 @@ jobs:
           node-version: 22
           cache: npm
 
-      - run: npm ci
+      # Not `npm ci`: sharp pulls platform-specific optional deps (@emnapi/*
+      # via @img/sharp-wasm32) that a lockfile generated on Windows can't
+      # resolve, so ci fails the in-sync check on a Linux runner.
+      - run: npm install --no-audit --no-fund
 
       - run: npm run build
 
