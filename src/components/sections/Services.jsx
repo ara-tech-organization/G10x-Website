@@ -40,8 +40,8 @@ export function Services() {
         <div className="max-w-3xl">
           <Eyebrow>{services.eyebrow}</Eyebrow>
           <SectionTitle id="services-heading" className="mt-7">
-            Build. Grow.{' '}
-            <span className="g-gradient-text">Dominate Online.</span>
+            Build! Grow!{' '}
+            <span className="g-gradient-text">Dominate Online!</span>
           </SectionTitle>
           <RevealText className="mt-7 text-lead leading-relaxed text-mist">
             {services.intro}

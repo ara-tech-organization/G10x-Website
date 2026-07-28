@@ -30,7 +30,9 @@ export const company = {
     '67A, Giri Road, Srinivasapuram, Thanjavur, Tamil Nadu – 613009',
   mapsHref:
     'https://www.google.com/maps/search/?api=1&query=G10X+Private+Limited,+67A+Giri+Road,+Srinivasapuram,+Thanjavur,+Tamil+Nadu+613009',
-  url: 'https://www.g10x.co.in/',
+  // Must match seo.canonical — schema.org url/@id pointing at a different
+  // host than the canonical tag splits the entity for crawlers.
+  url: 'https://g10x.co/',
   languages: ['English', 'Tamil'],
 }
 
@@ -39,8 +41,42 @@ export const seo = {
   description:
     'Looking for a trusted Digital Marketing Company in Thanjavur? G10X Private Limited offers SEO, social media, branding, web design, and digital marketing solutions.',
   canonical: 'https://g10x.co/',
-  keywords:
-    'digital marketing company in Thanjavur, digital marketing agency Thanjavur, best SEO company Thanjavur, social media marketing Thanjavur, branding agency Thanjavur, website development company Thanjavur',
+  // All five keyword groups from the content document: primary, secondary,
+  // long-tail, local and LSI — previously only primary + secondary shipped.
+  keywords: [
+    // Primary
+    'digital marketing company in Thanjavur',
+    'digital marketing agency Thanjavur',
+    // Secondary
+    'best SEO company Thanjavur',
+    'social media marketing Thanjavur',
+    'branding agency Thanjavur',
+    'website development company Thanjavur',
+    // Long-tail
+    'affordable digital marketing services for small business Thanjavur',
+    'digital marketing agency near Srinivasapuram Thanjavur',
+    // Local
+    'G10X Thanjavur',
+    'digital marketing Giri Road Thanjavur',
+    'Thanjavur digital agency 613009',
+    // Ranking-target variants
+    'best digital marketing company in Thanjavur',
+    'best digital marketing companies in Thanjavur',
+    'best digital marketing services in Thanjavur',
+    'best digital marketing agency in Thanjavur',
+    'best branding agency in Thanjavur',
+    'top digital marketing company in Thanjavur',
+    'top digital marketing companies in Thanjavur',
+    'top digital marketing services in Thanjavur',
+    'top digital marketing agency in Thanjavur',
+    // LSI
+    'online visibility',
+    'lead generation',
+    'ROI-driven marketing',
+    'brand growth',
+    'performance marketing',
+    'organic traffic',
+  ].join(', '),
 }
 
 export const nav = [
@@ -58,7 +94,7 @@ export const hero = {
   // "Digital Growth, Built for Your Business!" — split for the display treatment.
   headline: ['Digital Growth,', 'Built for Your', 'Business'],
   accentWordIndex: 2,
-  sub: 'G10X Private Limited blends strategy, creativity and technology to help brands get found online, win more customers and grow with confidence — without the guesswork.',
+  sub: 'G10X Private Limited blends strategy, creativity and technology to help brands get found online, win more customers and grow with confidence — without the guesswork, making us the best digital marketing company in Thanjavur for businesses ready to grow online.',
   supporting:
     'As a top digital marketing agency in Thanjavur, we work with shopkeepers, clinics, builders, manufacturers and ambitious startups who want a marketing partner that actually shows up, explains things clearly, and ties every rupee spent back to a result.',
   primaryCta: { label: 'Talk to Us', href: '#contact' },
@@ -77,10 +113,12 @@ export const about = {
   heading: 'Meet G10X — Your Growth Partner',
   body: [
     'G10X Private Limited was built around one idea: businesses deserve marketing that is honest, strategic and genuinely effective — not recycled templates dressed up as strategy. We sit down with every business owner, understand what "growth" actually means for them, and build a plan around that goal instead of a one-size-fits-all package.',
-    'Whether you are opening your first store, scaling a manufacturing unit, or trying to get your clinic’s phone to ring more often, our team designs the digital groundwork — search visibility, social presence, advertising and web experience — so your business shows up exactly when your next customer is searching.',
+    'Whether you are opening your first store, scaling a manufacturing unit, or trying to get your clinic’s phone to ring more often, our team designs the digital groundwork — search visibility, social presence, advertising and web experience — so your business shows up exactly when your next customer is searching. And as the best branding agency in Thanjavur, we make sure every touchpoint looks and feels consistent along the way.',
   ],
+  // The document's own closing line for paragraph one, isolated rather than
+  // dropped — it carries the "best digital marketing services" phrasing.
   pullQuote:
-    'A partner who listens first and strategizes second.',
+    'That’s why business owners across the district consider us among the best digital marketing services in Thanjavur when they want a partner who listens first and strategizes second.',
   cta: { label: 'Learn Our Story', href: '/about-us' },
   // Real, verifiable markers pulled from the document — not fabricated metrics.
   markers: [
@@ -127,7 +165,7 @@ export const whyUs = {
     },
     {
       title: 'Founder-led attention',
-      body: 'Direct access to decision-makers instead of getting passed between account managers.',
+      body: 'Direct access to decision-makers instead of getting passed between account managers — a hallmark of the top digital marketing company in Thanjavur businesses trust for accountability.',
     },
     {
       title: 'Strategies built around your goals',
@@ -142,9 +180,9 @@ export const whyUs = {
 
 export const services = {
   eyebrow: 'Capabilities',
-  heading: 'Build. Grow. Dominate Online.',
+  heading: 'Build! Grow! Dominate Online!',
   intro:
-    'From search rankings to scroll-stopping creatives, G10X brings every growth lever together under one strategy.',
+    'From search rankings to scroll-stopping creatives, G10X brings every growth lever together under one strategy, delivering the top digital marketing services in Thanjavur businesses need to compete.',
   items: [
     {
       id: 'seo',
@@ -458,7 +496,7 @@ export const pricing = {
 
 export const faq = {
   eyebrow: 'Answers',
-  heading: 'Frequently Asked Questions',
+  heading: 'Frequently Asked Questions (FAQs)',
   items: [
     {
       q: 'Which is the best digital marketing company in Thanjavur for businesses?',
@@ -478,7 +516,7 @@ export const faq = {
     },
     {
       q: 'What makes G10X different from other agencies in Thanjavur?',
-      a: 'We limit how many clients we take on at a time so every account gets founder-level attention, honest reporting, and a strategy tailored to your specific market, not a copy-paste package.',
+      a: 'We limit how many clients we take on at a time so every account gets founder-level attention, honest reporting, and a strategy tailored to your specific market, not a copy-paste package. It’s what makes us one of the best digital marketing services in Thanjavur for businesses that want measurable results.',
     },
   ],
 }

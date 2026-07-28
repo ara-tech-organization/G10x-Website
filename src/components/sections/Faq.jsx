@@ -26,7 +26,7 @@ export function Faq() {
           <Eyebrow>{faq.eyebrow}</Eyebrow>
           <SectionTitle id="faq-heading" className="mt-7">
             Frequently Asked{' '}
-            <span className="g-gradient-text">Questions</span>
+            <span className="g-gradient-text">Questions (FAQs)</span>
           </SectionTitle>
 
           <p className="mt-7 max-w-sm text-[1.0625rem] leading-relaxed text-mist">
@@ -60,7 +60,8 @@ export function Faq() {
                 variants={fadeUp}
                 className="border-b border-ink/8"
               >
-                <h3>
+                {/* H4 per the content spec — these sit under the section's H2. */}
+                <h4>
                   <button
                     type="button"
                     id={buttonId}
@@ -108,7 +109,7 @@ export function Faq() {
                       <Plus className="size-4" strokeWidth={2.4} />
                     </span>
                   </button>
-                </h3>
+                </h4>
 
                 <AnimatePresence initial={false}>
                   {open && (
