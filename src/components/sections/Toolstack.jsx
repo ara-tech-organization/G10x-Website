@@ -90,7 +90,7 @@ function ToolCell({ tool, index }) {
 
         <div className="flex items-start justify-between">
           <span
-            className="font-mono text-[0.6875rem] tracking-[0.24em] text-dim tabular-nums transition-colors duration-500 group-hover:text-brand-pink"
+            className="font-mono text-[0.6875rem] tracking-[0.24em] text-dim tabular-nums transition-colors duration-500 group-hover:text-accent"
             aria-hidden="true"
           >
             {String(index + 1).padStart(2, '0')}

@@ -51,7 +51,7 @@ export function Work() {
         {work.placeholder && (
           <p className="flex max-w-xl items-start gap-3 text-[0.875rem] leading-relaxed text-dim">
             <Radio
-              className="mt-0.5 size-4 shrink-0 text-brand-pink"
+              className="mt-0.5 size-4 shrink-0 text-accent"
               strokeWidth={2.2}
               aria-hidden="true"
             />
@@ -145,7 +145,7 @@ function ProjectPlate({ item, index }) {
                 {String(index + 1).padStart(2, '0')} /{' '}
                 {String(work.items.length).padStart(2, '0')}
               </span>
-              <span className="g-label text-brand-pink">{item.client}</span>
+              <span className="g-label text-accent">{item.client}</span>
               <StatusPill status={item.status} />
             </div>
 

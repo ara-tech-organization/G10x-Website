@@ -20,21 +20,56 @@ const OUT = resolve(here, '../src/assets/optimized')
 const WIDTHS = [320, 640]
 
 const SOURCES = [
-  { file: 'Footer.png', name: 'logo-light' }, // white "10X" — for dark surfaces
-  { file: 'Header.png', name: 'logo-dark' }, // navy "10X" — for light surfaces
+  // White "10X" — for dark surfaces. Ships with a correct alpha channel.
+  { file: 'Footer.png', name: 'logo-light' },
+  // Navy "10X" — for light surfaces. Ships FLATTENED ONTO BLACK with no alpha
+  // channel at all, so placing it on the light theme drew an opaque black box
+  // around the mark. Keyed below.
+  { file: 'Header.png', name: 'logo-dark', keyBlack: true },
 ]
 
 const kb = (bytes) => `${(bytes / 1024).toFixed(1)} kB`
 
+/**
+ * Restore transparency on artwork that was flattened onto black.
+ *
+ * The source is cleanly separated: the ground is exactly rgb(0,0,0) and the
+ * darkest artwork pixel is rgb(7,24,54), with only ~0.1% of pixels in between
+ * (the wordmark's antialiased edges). A hard key at max-channel ≤ 8 therefore
+ * removes the ground without touching the mark, and the ~10× downscale that
+ * follows rebuilds smooth edges on its own — sharp premultiplies alpha while
+ * resizing, so no dark fringe survives.
+ */
+async function keyOutBlack(input) {
+  const { data, info } = await sharp(input)
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true })
+
+  for (let i = 0; i < data.length; i += 4) {
+    const max = Math.max(data[i], data[i + 1], data[i + 2])
+    if (max <= 8) data[i + 3] = 0
+  }
+
+  return sharp(data, {
+    raw: { width: info.width, height: info.height, channels: 4 },
+  })
+    .png()
+    .toBuffer()
+}
+
 await mkdir(OUT, { recursive: true })
 
-for (const { file, name } of SOURCES) {
+for (const { file, name, keyBlack } of SOURCES) {
   const input = join(SRC, file)
   const before = (await stat(input)).size
   const meta = await sharp(input).metadata()
 
+  // Everything downstream works from this, so the key happens exactly once.
+  const source = keyBlack ? await keyOutBlack(input) : input
+
   for (const width of WIDTHS) {
-    const base = sharp(input).resize({ width, withoutEnlargement: true })
+    const base = sharp(source).resize({ width, withoutEnlargement: true })
 
     await base
       .clone()

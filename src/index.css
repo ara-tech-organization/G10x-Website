@@ -78,6 +78,14 @@
   --color-brand-pink-deep: #c62f7c;
   --color-brand-coral-deep: #b93a2b;
 
+  /* Accent for *text* — the small pink eyebrows, indices and active states.
+     The display pink is correct on the dark ground (5.3:1) but only reaches
+     3.5–3.8:1 on the light panels, under AA for the 11–12px labels it is used
+     on. This token carries the display pink on dark and the deepened pink on
+     light, so the same class is compliant in both. Decorative pink — glows,
+     rails, dots — stays on --color-brand-pink and does not flip. */
+  --color-accent: #df4a94;
+
   /* ---- Text ----------------------------------------------------------- */
   --color-chalk: #ffffff;
   --color-mist: #a8b0c4;
@@ -150,6 +158,7 @@
   --color-mist: #a8b0c4;
   --color-dim: #7d879f;
   --color-ink: #ffffff;
+  --color-accent: #df4a94;
 
   --wash-top: rgba(255, 255, 255, 0.055);
   --wash-mid: rgba(255, 255, 255, 0.012);
@@ -178,6 +187,9 @@
   --color-mist: #49536a;
   --color-dim: #5b6479;
   --color-ink: #0a1024;
+  /* 5.1:1 on the white panels, 4.9:1 on the page ground — the display pink
+     only manages 3.8:1 and 3.5:1 there. */
+  --color-accent: #c62f7c;
 
   /* The dark theme lights panels from the top edge; on white there is no
      light to add, so the same slot carries a soft downward shade instead. */

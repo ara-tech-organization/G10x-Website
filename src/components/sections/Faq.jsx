@@ -101,7 +101,7 @@ export function Faq() {
                       className={cn(
                         'mt-0.5 grid size-8 shrink-0 place-items-center rounded-full border transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]',
                         open
-                          ? 'rotate-45 border-brand-pink/60 text-brand-pink'
+                          ? 'rotate-45 border-brand-pink/60 text-accent'
                           : 'border-ink/14 text-mist group-hover:border-ink/32',
                       )}
                     >

@@ -229,7 +229,7 @@ function MobileSheet({ open, onClose, go }) {
                   <span className="text-xl font-semibold tracking-[-0.02em] text-chalk">
                     {item.label}
                   </span>
-                  <span className="g-label text-dim transition-colors group-hover:text-brand-pink">
+                  <span className="g-label text-dim transition-colors group-hover:text-accent">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                 </motion.a>

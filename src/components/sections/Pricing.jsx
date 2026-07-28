@@ -79,7 +79,7 @@ export function Pricing() {
                   >
                     <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full border border-ink/12">
                       <Check
-                        className="size-3.5 text-brand-pink"
+                        className="size-3.5 text-accent"
                         strokeWidth={3}
                         aria-hidden="true"
                       />

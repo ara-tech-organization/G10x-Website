@@ -5,6 +5,11 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  // GitHub Pages serves this repo from /G10x-Website/, so every asset URL has
+  // to be prefixed or the built index.html requests /assets/* from the domain
+  // root and renders a blank page. Overridable for a custom domain / local
+  // preview via BASE_PATH=/ npm run build.
+  base: process.env.BASE_PATH ?? '/G10x-Website/',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {

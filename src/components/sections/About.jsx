@@ -182,7 +182,7 @@ function Marker({ marker, index, total, progress }) {
 
         <div className="relative flex items-start justify-between gap-5">
           <div>
-            <span className="g-label text-brand-pink">{marker.k}</span>
+            <span className="g-label text-accent">{marker.k}</span>
             <h3 className="mt-2.5 text-xl font-bold tracking-[-0.02em] text-chalk md:text-2xl">
               {marker.label}
             </h3>

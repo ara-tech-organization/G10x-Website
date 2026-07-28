@@ -6,17 +6,24 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
 
-    <!-- Paint the brand background before React mounts, so there is never a
-         white flash ahead of the ignition sequence. This stays dark for both
-         themes: the ignition curtain that covers the first paint is always
-         dark, so matching it here is correct regardless of the stored
-         preference — and it means the theme can never cause a flash. -->
+    <!-- Paint the ground before React mounts, so there is never a white flash
+         ahead of the ignition sequence.
+
+         Scoped to <html> and keyed off data-theme on purpose. This block is
+         unlayered, and unlayered rules beat everything in @layer base
+         regardless of specificity — so declaring `body { background }` here
+         would permanently override the themed `bg-void` and pin the page dark
+         while child text still flipped to its light values. Leave body to
+         Tailwind; only the root canvas is pre-painted. -->
     <style>
-      html,
+      html {
+        background: #050814;
+      }
+      html[data-theme='light'] {
+        background: #f5f6fb;
+      }
       body {
         margin: 0;
-        background: #050814;
-        color: #fff;
       }
     </style>
 

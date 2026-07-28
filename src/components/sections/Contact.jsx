@@ -123,7 +123,7 @@ function ChannelCard({ channel, index }) {
         </span>
 
         <div className="min-w-0 flex-1">
-          <span className="g-label text-brand-pink">{channel.k}</span>
+          <span className="g-label text-accent">{channel.k}</span>
           <p className="mt-2 text-[1rem] leading-snug font-semibold text-chalk">
             {channel.value}
           </p>

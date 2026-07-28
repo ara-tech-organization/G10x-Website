@@ -75,7 +75,7 @@ export function Testimonials() {
           {testimonials.placeholder && (
             <p className="flex max-w-sm items-start gap-3 text-[0.875rem] leading-relaxed text-dim lg:pb-3">
               <Radio
-                className="mt-0.5 size-4 shrink-0 text-brand-pink"
+                className="mt-0.5 size-4 shrink-0 text-accent"
                 strokeWidth={2.2}
                 aria-hidden="true"
               />

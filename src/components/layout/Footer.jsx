@@ -95,7 +95,7 @@ export function Footer() {
                         href={link.href}
                         className="group inline-flex items-start gap-2 text-[0.9375rem] leading-snug text-mist transition-colors duration-300 hover:text-chalk"
                       >
-                        <ArrowGlyph className="mt-[0.4em] size-2 shrink-0 -rotate-45 text-dim transition-all duration-400 group-hover:translate-x-0.5 group-hover:text-brand-pink" />
+                        <ArrowGlyph className="mt-[0.4em] size-2 shrink-0 -rotate-45 text-dim transition-all duration-400 group-hover:translate-x-0.5 group-hover:text-accent" />
                         <span>{link.label}</span>
                       </a>
                     </li>

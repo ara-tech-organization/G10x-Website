@@ -13,9 +13,9 @@ import { useIsTablet } from '@/hooks/useMediaQuery'
  * Services as a command console.
  *
  * Six channels listed as illuminated rows on the left; selecting one drives a
- * live readout panel on the right — light beam, facet breakdown, and a large
- * ghosted index. On tablet and below the rows expand in place instead, because
- * a two-pane console does not survive a narrow viewport.
+ * live readout panel on the right — light beam and facet breakdown. On tablet
+ * and below the rows expand in place instead, because a two-pane console does
+ * not survive a narrow viewport.
  */
 export function Services() {
   const [activeId, setActiveId] = useState(services.items[0].id)
@@ -110,7 +110,7 @@ function ServiceRow({ service, active, compact, onActivate }) {
         <span
           className={cn(
             'relative shrink-0 font-mono text-[0.75rem] tracking-[0.2em] tabular-nums transition-colors duration-400',
-            active ? 'text-brand-pink' : 'text-dim',
+            active ? 'text-accent' : 'text-dim',
           )}
           aria-hidden="true"
         >
@@ -161,7 +161,7 @@ function ServiceRow({ service, active, compact, onActivate }) {
           className={cn(
             'relative size-3 shrink-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]',
             active
-              ? 'translate-x-1 text-brand-pink'
+              ? 'translate-x-1 text-accent'
               : 'text-dim group-hover:translate-x-1',
           )}
         />
@@ -170,18 +170,10 @@ function ServiceRow({ service, active, compact, onActivate }) {
   )
 }
 
-/** The live panel: index plate, description, facets, and the deep link. */
+/** The live panel: description, facets, and the deep link. */
 function Readout({ service }) {
   return (
     <div className="g-panel relative overflow-hidden rounded-3xl p-9 lg:p-10">
-      {/* Oversized ghost index — the machined plate behind the data. */}
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-10 -right-4 text-[11rem] leading-none font-black text-chalk/[0.028] select-none"
-      >
-        {service.index}
-      </span>
-
       {/* Beam sweeping the top edge. */}
       <span
         aria-hidden="true"
@@ -197,7 +189,7 @@ function Readout({ service }) {
           transition={{ duration: 0.55, ease: EASE.expo }}
           className="relative"
         >
-          <span className="g-label text-brand-pink">{service.abbr}</span>
+          <span className="g-label text-accent">{service.abbr}</span>
 
           <h3 className="mt-4 text-[1.75rem] leading-[1.1] font-bold tracking-[-0.03em] text-chalk">
             {service.title}
