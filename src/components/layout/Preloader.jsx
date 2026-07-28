@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { EASE } from '@/lib/motion'
 import { Logo } from '@/components/ui/Logo'
+import { useTheme } from '@/hooks/useTheme'
 
 /**
  * Ignition sequence.
@@ -19,6 +20,7 @@ const MAX_DURATION = 5000
 
 export function Preloader({ onComplete }) {
   const reduceMotion = useReducedMotion()
+  const { isLight } = useTheme()
   const [progress, setProgress] = useState(0)
   const [done, setDone] = useState(false)
   // Stamped in the effect, not during render — render must stay pure.
@@ -137,7 +139,7 @@ export function Preloader({ onComplete }) {
                   cy="100"
                   r="92"
                   fill="none"
-                  stroke="rgba(255,255,255,0.07)"
+                  stroke="var(--line-soft)"
                   strokeWidth="2"
                 />
                 {/* Progress arc — the tachometer needle sweep. */}
@@ -205,7 +207,13 @@ export function Preloader({ onComplete }) {
               transition={{ duration: 1, ease: EASE.expo, delay: 0.8 }}
               className="flex w-full flex-col items-center gap-7"
             >
-              <Logo priority className="w-[min(62vw,15rem)]" />
+              {/* The curtain is bg-abyss, which flips with the theme — so the
+                  lockup has to flip with it or the wordmark disappears. */}
+              <Logo
+                priority
+                variant={isLight ? 'dark' : 'light'}
+                className="w-[min(62vw,15rem)]"
+              />
 
               {/* Beat 4 — gradient floods the rail as the counter climbs. */}
               <div className="flex w-full flex-col gap-3">

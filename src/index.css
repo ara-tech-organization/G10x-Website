@@ -113,6 +113,15 @@
   --noise-opacity: 0.035;
   --noise-blend: overlay;
 
+  /* Decorative line work that is drawn inline rather than through a utility:
+     blueprint grids, gauge dial tracks and tick marks. These were literal
+     whites, which vanish completely on the light ground — the dials lost their
+     tracks and the grids their texture. Kept as separate tokens (rather than
+     folded into --line-*) so the dark values stay pixel-identical. */
+  --grid-line: rgba(255, 255, 255, 0.7);
+  --dial-track: rgba(255, 255, 255, 0.075);
+  --dial-tick: rgba(255, 255, 255, 0.2);
+
   /* ---- Type ----------------------------------------------------------- */
   --font-sans:
     'Open Sauce Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
@@ -168,6 +177,10 @@
   --glass-line: rgba(255, 255, 255, 0.08);
   --noise-opacity: 0.035;
   --noise-blend: overlay;
+
+  --grid-line: rgba(255, 255, 255, 0.7);
+  --dial-track: rgba(255, 255, 255, 0.075);
+  --dial-tick: rgba(255, 255, 255, 0.2);
 }
 
 [data-theme='light'] {
@@ -203,6 +216,13 @@
      grain, and it needs far less of it to do the same anti-banding job. */
   --noise-opacity: 0.02;
   --noise-blend: multiply;
+
+  /* Dark ink rather than white, so grids and dial tracks stay visible. The
+     alphas run slightly higher than their dark counterparts: dark line work on
+     a light ground reads weaker at matched opacity. */
+  --grid-line: rgba(10, 16, 36, 0.55);
+  --dial-track: rgba(10, 16, 36, 0.12);
+  --dial-tick: rgba(10, 16, 36, 0.24);
 }
 
 @layer base {

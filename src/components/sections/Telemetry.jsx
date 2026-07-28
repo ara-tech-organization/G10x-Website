@@ -112,7 +112,7 @@ function Gauge({ gauge, index }) {
                 cy="80"
                 r={R}
                 fill="none"
-                stroke="rgba(255,255,255,0.075)"
+                stroke="var(--dial-track)"
                 strokeWidth="7"
                 strokeLinecap="round"
                 strokeDasharray={`${arcLength} ${CIRC}`}
@@ -152,7 +152,7 @@ function Gauge({ gauge, index }) {
                   y1={80 + Math.sin(angle) * inner}
                   x2={80 + Math.cos(angle) * 55}
                   y2={80 + Math.sin(angle) * 55}
-                  stroke="rgba(255,255,255,0.2)"
+                  stroke="var(--dial-tick)"
                   strokeWidth={t % 5 === 0 ? 1.6 : 0.9}
                   strokeLinecap="round"
                 />

@@ -113,6 +113,11 @@ No two sections share a layout. Highlights:
 - **Testimonials** — a channel strip: the tuned-in quote opens to full width
   while the others compress to vertical spines. Stacks and fully opens below
   `lg`, where a horizontal accordion would be unusable.
+- **Work** — an editorial index with no panels, cards or rules at all: the
+  three projects are held apart by scale, whitespace and an indent that steps
+  right on each entry, so the set climbs the page as a diagonal. Deliberately
+  the quietest structure on the page, since it sits between the gauge dials and
+  the testimonial channel strip.
 - **Contact** — channels over a radar sweep, plus the enquiry form.
 
 ---
@@ -133,6 +138,27 @@ default in both the header and the footer — the navy one is illegible here. Pa
 6160×2533 (1.4 MB together) and never render above ~240 px. `npm run
 optimize:logos` regenerates 320/640 px WebP + PNG variants (78 kB total). Re-run
 it if the source artwork changes; do not import the raw PNGs.
+
+**The pre-paint style in `index.html` must stay off `body`.** That `<style>`
+block is unlayered, and unlayered rules beat everything in `@layer base`
+regardless of specificity. Declaring `body { background }` there overrode the
+themed `bg-void` permanently — the page stayed dark while every child's text
+flipped to its light values, which read as the whole light theme being broken.
+Only `<html>` is pre-painted, keyed off `data-theme`.
+
+**`Header.png` has no alpha channel.** The supplied navy lockup is flattened
+onto opaque black, so on the light theme it drew a black box around the mark.
+`npm run optimize:logos` keys the ground out: the background is exactly
+`rgb(0,0,0)` and the darkest artwork pixel is `rgb(7,24,54)`, so a hard key at
+max-channel ≤ 8 is safe, and the ~10× downscale rebuilds clean edges.
+
+**`text-accent`, not `text-brand-pink`, for text.** The display pink clears AA
+on the dark ground but only reaches 3.5–3.8:1 on the light panels, under the bar
+for the 11–12px labels it is used on. `--color-accent` carries the display pink
+on dark and a deepened pink on light. Decorative pink — glows, rails, dots —
+stays on `--color-brand-pink` and does not flip. Likewise `--grid-line`,
+`--dial-track` and `--dial-tick` exist because literal whites drawn inline
+(blueprint grids, gauge tracks) disappear entirely on the light ground.
 
 **Colour has two ramps, on purpose.** `.g-gradient` is the display ramp for
 glows, hairlines and gradient type. `.g-gradient-fill` is the same ramp

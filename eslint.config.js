@@ -19,6 +19,12 @@ export default defineConfig([
     },
   },
   {
+    // Build config and scripts run in Node, not the browser — they legitimately
+    // reach for `process`, which the browser globals list does not define.
+    files: ['vite.config.js', 'eslint.config.js', 'scripts/**/*.mjs'],
+    languageOptions: { globals: globals.node },
+  },
+  {
     /**
      * React Three Fiber scene graph.
      *

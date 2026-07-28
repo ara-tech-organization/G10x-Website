@@ -378,7 +378,7 @@ function FinalCta() {
         className="pointer-events-none absolute inset-0 opacity-[0.09]"
         style={{
           backgroundImage:
-            'linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)',
+            'linear-gradient(90deg, var(--grid-line) 1px, transparent 1px)',
           backgroundSize: '44px 44px',
         }}
       />

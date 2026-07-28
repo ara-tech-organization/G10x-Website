@@ -136,7 +136,7 @@ function CurvedSpine({ draw }) {
       <path
         d="M 60 40 C 380 40, 420 200, 700 210 C 940 220, 620 400, 320 420 C 90 436, 480 580, 940 590"
         fill="none"
-        stroke="rgba(255,255,255,0.07)"
+        stroke="var(--line-soft)"
         strokeWidth="2"
         strokeLinecap="round"
       />
