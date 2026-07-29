@@ -134,7 +134,10 @@
   /* Hero h1 only. Held one step above the rest of the scale on purpose: the
      section headings were cut further, but the opening statement carries the
      page and reads underweight at the smaller size. */
-  --text-hero: clamp(2.1875rem, 6.811vw, 6.375rem);
+  /* Hero h1 only. The floor is deliberately unchanged from the previous step —
+     it governs everything under ~593px, so trimming the desktop end leaves the
+     phone rendering exactly as it was. */
+  --text-hero: clamp(2.1875rem, 5.9vw, 5.5rem);
   --text-display: clamp(1.625rem, 3.1vw, 2.75rem);
   /* Process section heading only. Sits one step under --text-display because
      on desktop it shares its row with the route readout — but it was reading
