@@ -57,10 +57,13 @@
 
 @theme {
   /* ---- Surfaces ------------------------------------------------------- */
-  --color-void: #050814;
-  --color-abyss: #02040c;
-  --color-panel: #0a0f22;
-  --color-panel-2: #0e142b;
+  /* Not pure white. A faint blue-grey ground keeps the panels (which *are*
+     pure white) legible as raised surfaces, and stops the large empty areas
+     from glaring next to the saturated brand ramp. */
+  --color-void: #f5f6fb;
+  --color-abyss: #e8ebf4;
+  --color-panel: #ffffff;
+  --color-panel-2: #f1f3fa;
 
   /* ---- Accent ramp, sampled from the G10X mark ------------------------ */
   --color-brand-purple: #7c2ff4;
@@ -83,44 +86,49 @@
      3.5–3.8:1 on the light panels, under AA for the 11–12px labels it is used
      on. This token carries the display pink on dark and the deepened pink on
      light, so the same class is compliant in both. Decorative pink — glows,
-     rails, dots — stays on --color-brand-pink and does not flip. */
-  --color-accent: #df4a94;
+     rails, dots — stays on --color-brand-pink and does not flip.
+     5.1:1 on the white panels, 4.9:1 on the page ground. */
+  --color-accent: #c62f7c;
 
-  /* ---- Text ----------------------------------------------------------- */
-  --color-chalk: #ffffff;
-  --color-mist: #a8b0c4;
-  /* Tertiary grey, raised from #6f7891 so the small monospaced labels it is
-     used for clear AA: 5.5:1 on --color-void, 5.3:1 on --color-panel. */
-  --color-dim: #7d879f;
+  /* ---- Text -------------------------------------------------------------
+     Measured against --color-void (#f5f6fb): chalk 17.4:1 · mist 7.3:1 ·
+     dim 5.6:1. dim carries the small monospaced labels, so 4.5:1 was the bar
+     it had to beat rather than 3:1. */
+  --color-chalk: #0a0f22;
+  --color-mist: #49536a;
+  --color-dim: #5b6479;
 
   /* ---- Ink -------------------------------------------------------------
      The base colour for every hairline, chip fill and overlay wash — i.e.
      everything that used to be written as a literal `white/8`. It is the
      one token that fully inverts between themes, which is what lets a
-     single `border-ink/10` read as a light hairline on the dark theme and
-     a dark one on the light theme. Never use it for body text; that is
+     single `border-ink/10` read as a dark hairline on the light theme and
+     a light one on the dark theme. Never use it for body text; that is
      --color-chalk. */
-  --color-ink: #ffffff;
+  --color-ink: #0a1024;
 
   /* Surface washes and hairlines, consumed by the .g-* components below.
-     Declared here so the light theme can restate them in one place. */
-  --wash-top: rgba(255, 255, 255, 0.055);
-  --wash-mid: rgba(255, 255, 255, 0.012);
-  --line-soft: rgba(255, 255, 255, 0.075);
-  --line-rule: rgba(255, 255, 255, 0.16);
-  --glass-bg: rgba(12, 17, 38, 0.55);
-  --glass-line: rgba(255, 255, 255, 0.08);
-  --noise-opacity: 0.035;
-  --noise-blend: overlay;
+     The dark theme lights panels from the top edge; on white there is no light
+     to add, so the same slot carries a soft downward shade instead. */
+  --wash-top: rgba(10, 16, 36, 0.028);
+  --wash-mid: rgba(10, 16, 36, 0.008);
+  --line-soft: rgba(10, 16, 36, 0.1);
+  --line-rule: rgba(10, 16, 36, 0.16);
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-line: rgba(10, 16, 36, 0.08);
+  /* Overlay-blended noise turns milky on light grounds; multiply keeps it as
+     grain, and it needs far less of it to do the same anti-banding job. */
+  --noise-opacity: 0.02;
+  --noise-blend: multiply;
 
-  /* Decorative line work that is drawn inline rather than through a utility:
-     blueprint grids, gauge dial tracks and tick marks. These were literal
-     whites, which vanish completely on the light ground — the dials lost their
-     tracks and the grids their texture. Kept as separate tokens (rather than
-     folded into --line-*) so the dark values stay pixel-identical. */
-  --grid-line: rgba(255, 255, 255, 0.7);
-  --dial-track: rgba(255, 255, 255, 0.075);
-  --dial-tick: rgba(255, 255, 255, 0.2);
+  /* Decorative line work drawn inline rather than through a utility: blueprint
+     grids, gauge dial tracks and tick marks. These were literal whites, which
+     vanish completely on the light ground — the dials lost their tracks and the
+     grids their texture. Kept as separate tokens (rather than folded into
+     --line-*) so each theme's values stay exact. */
+  --grid-line: rgba(10, 16, 36, 0.55);
+  --dial-track: rgba(10, 16, 36, 0.12);
+  --dial-tick: rgba(10, 16, 36, 0.24);
 
   /* ---- Type ----------------------------------------------------------- */
   --font-sans:
@@ -160,15 +168,16 @@
 /* ---------------------------------------------------------------------------
    Themes.
 
-   `@theme` above holds the dark values, so :root is already correct and the
-   dark theme costs nothing at runtime. The two blocks below exist so a theme
-   can be scoped to a *subtree*, not just the document: because both are
-   attribute selectors of equal weight, a `data-theme="dark"` element nested
-   inside a light document restates the dark tokens for everything under it.
+   `@theme` above holds the LIGHT values, because light is the default the
+   pre-paint script in index.html resolves to. That means :root is already
+   correct for a first-time visitor, and it is also what renders if scripting
+   is unavailable — otherwise a no-JS visitor would get the light ground from
+   the inline <style> with the dark text tokens on top of it.
 
-   That is what pins the Preloader curtain and the gradient closing band to
-   dark in both themes — those two surfaces are brand furniture rather than
-   page chrome, and inverting them would wreck the artwork sitting on top.
+   The two blocks below restate each theme in full, so a theme can be scoped to
+   a *subtree* rather than the document: because both are attribute selectors of
+   equal weight, a `data-theme="dark"` element nested inside a light document
+   re-declares the dark tokens for everything under it.
 
    Only surfaces, text and ink flip. The brand ramp never does: it is the
    identity, and it reads correctly on both grounds.

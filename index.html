@@ -17,10 +17,10 @@
          Tailwind; only the root canvas is pre-painted. -->
     <style>
       html {
-        background: #050814;
-      }
-      html[data-theme='light'] {
         background: #f5f6fb;
+      }
+      html[data-theme='dark'] {
+        background: #050814;
       }
       body {
         margin: 0;
@@ -32,15 +32,15 @@
          default theme first and flash the wrong ground on toggle-back. -->
     <script>
       ;(function () {
-        var t = 'dark'
+        var t = 'light'
         try {
           var saved = localStorage.getItem('g10x-theme')
-          // Only an explicit choice wins. Absent one the site stays dark —
-          // it is the brand default and the ground the artwork is built for,
-          // so prefers-color-scheme is deliberately not consulted here.
+          // Only an explicit choice wins. Absent one the site opens light;
+          // prefers-color-scheme is deliberately not consulted, so the default
+          // is the same for every first-time visitor.
           if (saved === 'light' || saved === 'dark') t = saved
         } catch (e) {
-          /* Safari private mode throws on localStorage; dark is the fallback. */
+          /* Safari private mode throws on localStorage; light is the fallback. */
         }
         document.documentElement.setAttribute('data-theme', t)
       })()

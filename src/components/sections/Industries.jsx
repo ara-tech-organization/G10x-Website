@@ -26,7 +26,7 @@ export function Industries() {
     <SectionShell
       id="industries"
       labelledBy="industries-heading"
-      className="relative overflow-hidden bg-abyss py-24 md:py-32 lg:py-36"
+      className="relative overflow-hidden bg-abyss py-16 md:py-20 lg:py-24"
       containerClassName="max-w-none px-0 md:px-0 lg:px-0"
     >
       <div className="mx-auto w-full max-w-[86rem] px-6 md:px-10 lg:px-14">

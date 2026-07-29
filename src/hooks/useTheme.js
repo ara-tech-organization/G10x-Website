@@ -17,9 +17,9 @@ export const ThemeContext = createContext(null)
 
 /** Whatever the pre-paint script decided. Never guesses. */
 export function readStoredTheme() {
-  return document.documentElement.getAttribute('data-theme') === 'light'
-    ? 'light'
-    : 'dark'
+  return document.documentElement.getAttribute('data-theme') === 'dark'
+    ? 'dark'
+    : 'light'
 }
 
 export function useTheme() {

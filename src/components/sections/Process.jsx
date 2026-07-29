@@ -303,7 +303,7 @@ function ProcessStacked() {
     <section
       id="process"
       aria-labelledby="process-heading-m"
-      className="relative overflow-hidden py-24 md:py-32"
+      className="relative overflow-hidden py-16 md:py-20"
     >
       <div
         aria-hidden="true"

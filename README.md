@@ -160,6 +160,15 @@ stays on `--color-brand-pink` and does not flip. Likewise `--grid-line`,
 `--dial-track` and `--dial-tick` exist because literal whites drawn inline
 (blueprint grids, gauge tracks) disappear entirely on the light ground.
 
+**Light is the default theme, and three places have to agree on that.** The
+pre-paint script in `index.html`, `readStoredTheme()` in `hooks/useTheme.js`,
+and the `@theme` block in `index.css` all resolve to light when nothing is
+stored. `@theme` holds the *light* values specifically so a no-JS visitor gets
+the light ground from the inline `<style>` with matching light text tokens —
+with dark values there, they would have got dark text on a light page. Both
+`[data-theme]` blocks restate their theme in full, so either can also be scoped
+to a subtree. Toggling writes to `localStorage` and persists across reloads.
+
 **Colour has two ramps, on purpose.** `.g-gradient` is the display ramp for
 glows, hairlines and gradient type. `.g-gradient-fill` is the same ramp
 deepened, for any filled surface carrying white text — white on the display

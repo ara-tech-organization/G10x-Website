@@ -19,7 +19,10 @@ export function SectionShell({
     <section
       id={id}
       aria-labelledby={labelledBy}
-      className={cn('relative w-full py-24 md:py-32 lg:py-40', className)}
+      // Padding is halved between neighbours: two adjacent sections each
+      // contribute their own, so `lg:py-40` was stacking 320px of empty ground
+      // between every pair. These values still read as generous once doubled.
+      className={cn('relative w-full py-16 md:py-20 lg:py-24', className)}
     >
       <div
         className={cn(
