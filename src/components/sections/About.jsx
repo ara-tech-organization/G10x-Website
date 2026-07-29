@@ -64,7 +64,10 @@ export function About() {
               aria-hidden="true"
               className="g-gradient absolute top-1 bottom-1 left-0 w-[2px] rounded-full"
             />
-            <p className="text-title leading-[1.15] font-bold text-chalk">
+            {/* Sized independently of --text-title: this is a full sentence
+                rather than a short line, so at heading scale it ran to three
+                heavy lines and competed with the section h2 above it. */}
+            <p className="text-[clamp(1.0625rem,1.75vw,1.375rem)] leading-[1.35] font-semibold text-balance text-chalk">
               “{about.pullQuote}”
             </p>
           </motion.blockquote>
@@ -186,7 +189,7 @@ function Marker({ marker, index, total, progress }) {
             <h3 className="mt-2.5 text-xl font-bold tracking-[-0.02em] text-chalk md:text-2xl">
               {marker.label}
             </h3>
-            <p className="mt-2.5 max-w-sm text-[0.9375rem] leading-relaxed text-mist">
+            <p className="mt-2.5 max-w-sm text-[0.875rem] leading-relaxed text-mist">
               {marker.detail}
             </p>
           </div>

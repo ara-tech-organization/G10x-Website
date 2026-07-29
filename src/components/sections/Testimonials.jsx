@@ -162,7 +162,7 @@ function Channel({ item, index, total, open, compact, reduceMotion, onOpen }) {
 
           {/* Name set vertically along the spine. */}
           <span
-            className="text-[1.0625rem] font-bold tracking-[-0.01em] whitespace-nowrap text-mist transition-colors duration-400 group-hover:text-chalk"
+            className="text-[1rem] font-bold tracking-[-0.01em] whitespace-nowrap text-mist transition-colors duration-400 group-hover:text-chalk"
             style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
           >
             {item.name}
@@ -201,7 +201,7 @@ function Channel({ item, index, total, open, compact, reduceMotion, onOpen }) {
             />
 
             <blockquote className="relative">
-              <p className="max-w-3xl text-[clamp(1.25rem,2.3vw,1.875rem)] leading-[1.28] font-bold tracking-[-0.025em] text-chalk">
+              <p className="max-w-3xl text-[clamp(1.125rem,2.07vw,1.6875rem)] leading-[1.28] font-bold tracking-[-0.025em] text-chalk">
                 “{item.quote}”
               </p>
             </blockquote>
@@ -219,7 +219,7 @@ function Channel({ item, index, total, open, compact, reduceMotion, onOpen }) {
                   </span>
                 </span>
                 <div>
-                  <cite className="block text-[1.0625rem] font-bold tracking-[-0.02em] text-chalk not-italic">
+                  <cite className="block text-[1rem] font-bold tracking-[-0.02em] text-chalk not-italic">
                     {item.name}
                   </cite>
                   <span className="mt-0.5 block text-[0.875rem] text-mist">

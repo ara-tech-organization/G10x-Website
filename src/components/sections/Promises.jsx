@@ -80,10 +80,10 @@ export function Promises() {
                   </span>
 
                   <div className="min-w-0">
-                    <h3 className="text-[1.1875rem] leading-snug font-bold tracking-[-0.02em] text-chalk md:text-[1.3125rem]">
+                    <h3 className="text-[1.0625rem] leading-snug font-bold tracking-[-0.02em] text-chalk md:text-[1.125rem]">
                       {item.title}
                     </h3>
-                    <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-mist">
+                    <p className="mt-2.5 text-[0.875rem] leading-relaxed text-mist">
                       {item.body}
                     </p>
                   </div>

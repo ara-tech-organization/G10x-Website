@@ -124,7 +124,7 @@ function ChannelCard({ channel, index }) {
 
         <div className="min-w-0 flex-1">
           <span className="g-label text-accent">{channel.k}</span>
-          <p className="mt-2 text-[1rem] leading-snug font-semibold text-chalk">
+          <p className="mt-2 text-[0.9375rem] leading-snug font-semibold text-chalk">
             {channel.value}
           </p>
           <span className="mt-3 inline-flex items-center gap-1.5 text-[0.8125rem] font-medium text-mist transition-colors group-hover:text-chalk">
@@ -205,10 +205,10 @@ function EnquiryForm() {
       </div>
 
       <div className="relative">
-        <h3 className="text-[1.5rem] leading-tight font-bold tracking-[-0.03em] text-chalk md:text-[1.75rem]">
+        <h3 className="text-[1.125rem] leading-tight font-bold tracking-[-0.03em] text-chalk md:text-[1.3125rem]">
           Book a free strategy call
         </h3>
-        <p className="mt-3 text-[0.9375rem] leading-relaxed text-mist">
+        <p className="mt-3 text-[0.875rem] leading-relaxed text-mist">
           Tell us what you’re trying to grow. We’ll come back with a plan, not a
           sales script.
         </p>
@@ -305,7 +305,7 @@ function Field({
 
   const shared = cn(
     'peer w-full rounded-xl border border-ink/10 bg-ink/[0.025] px-4 py-3.5',
-    'text-[0.9375rem] text-chalk placeholder:text-dim',
+    'text-[0.875rem] text-chalk placeholder:text-dim',
     'transition-colors duration-300 outline-none',
     'hover:border-ink/20 focus:border-brand-pink/70 focus:bg-ink/[0.045]',
     className,
@@ -385,7 +385,7 @@ function FinalCta() {
 
       <div className="relative flex flex-col items-start gap-9 p-9 md:p-14 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
         <div className="max-w-2xl">
-          <h3 className="text-[clamp(1.875rem,4vw,3.25rem)] leading-[1.02] font-black tracking-[-0.04em] text-chalk">
+          <h3 className="text-[clamp(1.375rem,2.75vw,2.25rem)] leading-[1.02] font-black tracking-[-0.04em] text-chalk">
             {contact.finalHeading}
           </h3>
           <p className="mt-5 max-w-xl text-lead leading-relaxed text-chalk/70">

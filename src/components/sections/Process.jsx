@@ -63,7 +63,9 @@ function ProcessTravelling() {
   }, [])
 
   const x = useTransform(progress, [0, 1], [56, -distance])
-  const paintX = useTransform(progress, [0, 1], ['0%', '-180%'])
+  // Ten dash periods (130px each) across the whole route. Any distance works —
+  // the pattern tiles — so this is purely how fast the paint appears to stream.
+  const paintX = useTransform(progress, [0, 1], ['0px', '-1300px'])
   const speedBlur = useTransform(progress, [0, 0.5, 1], [0, 1, 0])
 
   return (
@@ -141,22 +143,21 @@ function RoadBed({ paintX, speedBlur }) {
         }}
       />
 
-      {/* Centre paint — dashes that stream past. */}
-      <div className="absolute inset-x-0 bottom-[16%] h-[3px] overflow-hidden opacity-50">
-        <motion.div
-          style={{ x: paintX }}
-          className="h-full w-[300%]"
-          // Dash pattern in the brand ramp: the arrow motif as road marking.
-        >
-          <div
-            className="h-full w-full"
-            style={{
-              backgroundImage:
-                'repeating-linear-gradient(90deg, #a438e8 0 60px, transparent 60px 130px)',
-            }}
-          />
-        </motion.div>
-      </div>
+      {/* Centre paint — dashes that stream past.
+
+          Scrolled via background-position rather than by translating a finite
+          strip. A repeating gradient tiles forever, so the paint can never run
+          out; the previous version slid a 300%-wide element by -180% of its own
+          width (-5.4 viewports) and so ran off-screen around stage 05, leaving
+          the back half of the route with no road markings at all. */}
+      <motion.div
+        className="absolute inset-x-0 bottom-[16%] h-[3px] opacity-50"
+        style={{
+          backgroundImage:
+            'repeating-linear-gradient(90deg, var(--color-brand-violet) 0 60px, transparent 60px 130px)',
+          backgroundPositionX: paintX,
+        }}
+      />
     </div>
   )
 }
@@ -234,7 +235,7 @@ function StageCard({ stage, index }) {
         />
 
         <div className="relative flex items-center justify-between">
-          <span className="g-gradient-text text-[3.5rem] leading-none font-black tracking-[-0.05em]">
+          <span className="g-gradient-text text-[3.0625rem] leading-none font-black tracking-[-0.05em]">
             {stage.n}
           </span>
           <span className="rounded-full border border-ink/12 px-3 py-1">
@@ -242,10 +243,10 @@ function StageCard({ stage, index }) {
           </span>
         </div>
 
-        <h3 className="relative mt-8 text-[1.5rem] leading-tight font-bold tracking-[-0.03em] text-chalk">
+        <h3 className="relative mt-8 text-[1.125rem] leading-tight font-bold tracking-[-0.03em] text-chalk">
           {stage.title}
         </h3>
-        <p className="relative mt-3.5 text-[0.9375rem] leading-relaxed text-mist">
+        <p className="relative mt-3.5 text-[0.875rem] leading-relaxed text-mist">
           {stage.body}
         </p>
 
@@ -282,10 +283,10 @@ function Destination() {
           ))}
         </span>
 
-        <h3 className="text-[2.25rem] leading-[0.95] font-black tracking-[-0.04em] text-chalk">
+        <h3 className="text-[1.5625rem] leading-[0.95] font-black tracking-[-0.04em] text-chalk">
           Growth that <span className="g-gradient-text">compounds.</span>
         </h3>
-        <p className="max-w-xs text-[0.9375rem] leading-relaxed text-mist">
+        <p className="max-w-xs text-[0.875rem] leading-relaxed text-mist">
           Seven stages, one direction. Every cycle makes the next one cheaper.
         </p>
       </div>
@@ -342,7 +343,7 @@ function ProcessStacked() {
               />
               <div className="g-panel rounded-2xl p-6">
                 <div className="flex items-center justify-between">
-                  <span className="g-gradient-text text-[2rem] leading-none font-black tracking-[-0.05em]">
+                  <span className="g-gradient-text text-[1.8125rem] leading-none font-black tracking-[-0.05em]">
                     {stage.n}
                   </span>
                   <span className="rounded-full border border-ink/12 px-3 py-1">
@@ -352,7 +353,7 @@ function ProcessStacked() {
                 <h3 className="mt-5 text-xl leading-tight font-bold tracking-[-0.025em] text-chalk">
                   {stage.title}
                 </h3>
-                <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-mist">
+                <p className="mt-2.5 text-[0.875rem] leading-relaxed text-mist">
                   {stage.body}
                 </p>
               </div>

@@ -117,7 +117,7 @@ export function Header() {
                     onClick={go(item.href)}
                     aria-current={isActive ? 'true' : undefined}
                     className={cn(
-                      'group relative px-4 py-2.5 text-[0.9375rem] font-medium transition-colors duration-300',
+                      'group relative px-4 py-2.5 text-[0.875rem] font-medium transition-colors duration-300',
                       isActive ? 'text-chalk' : 'text-mist hover:text-chalk',
                     )}
                   >

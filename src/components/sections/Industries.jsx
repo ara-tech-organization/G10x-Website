@@ -74,7 +74,7 @@ export function Industries() {
           variants={fadeUp}
           className="g-panel flex flex-col items-start justify-between gap-6 rounded-3xl p-8 md:flex-row md:items-center md:p-10"
         >
-          <p className="max-w-lg text-[1.375rem] leading-snug font-semibold tracking-[-0.025em] text-chalk md:text-[1.625rem]">
+          <p className="max-w-lg text-[1.25rem] leading-snug font-semibold tracking-[-0.025em] text-chalk md:text-[1.4375rem]">
             {industries.outro}
           </p>
           <Button href={industries.cta.href} size="lg" className="shrink-0">
@@ -93,7 +93,7 @@ export function Industries() {
 function IndustryPlate({ name }) {
   return (
     <span className="group flex shrink-0 items-center gap-6 pr-8 md:gap-9 md:pr-12">
-      <span className="relative block text-[clamp(1.75rem,4.6vw,3.75rem)] leading-none font-black tracking-[-0.035em] whitespace-nowrap">
+      <span className="relative block text-[clamp(1.5625rem,4.048vw,3.3125rem)] leading-none font-black tracking-[-0.035em] whitespace-nowrap">
         {/* Base: hollow, low-contrast. */}
         <span className="text-chalk/22 transition-colors duration-500 group-hover:text-transparent">
           {name}

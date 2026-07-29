@@ -84,7 +84,7 @@ export function Pricing() {
                         aria-hidden="true"
                       />
                     </span>
-                    <span className="text-[1rem] leading-snug font-medium text-chalk">
+                    <span className="text-[0.9375rem] leading-snug font-medium text-chalk">
                       {point}
                     </span>
                   </motion.li>

@@ -108,7 +108,7 @@ function ToolCell({ tool, index }) {
         </div>
 
         <div>
-          <h3 className="text-[1.125rem] leading-snug font-bold tracking-[-0.02em] text-chalk">
+          <h3 className="text-[1rem] leading-snug font-bold tracking-[-0.02em] text-chalk">
             {tool.name}
           </h3>
           <p className="mt-2 text-[0.875rem] leading-relaxed text-mist">

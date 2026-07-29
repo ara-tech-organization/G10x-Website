@@ -149,11 +149,11 @@ function ProjectPlate({ item, index }) {
               <StatusPill status={item.status} />
             </div>
 
-            <h3 className="mt-6 text-[clamp(1.625rem,3.2vw,2.5rem)] leading-[1.05] font-black tracking-[-0.035em] text-chalk">
+            <h3 className="mt-6 text-[clamp(1.1875rem,2.2vw,1.75rem)] leading-[1.05] font-black tracking-[-0.035em] text-chalk">
               {item.title}
             </h3>
 
-            <p className="mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-mist">
+            <p className="mt-5 max-w-2xl text-[1rem] leading-relaxed text-mist">
               {item.body}
             </p>
 

@@ -218,7 +218,7 @@ export function Hero() {
               hidden: { opacity: 0 },
               show: { opacity: 1, transition: { duration: 1.2, delay: 0.2 } },
             }}
-            className="mt-12 max-w-xl border-l border-ink/12 pl-5 text-[0.9375rem] leading-relaxed text-dim"
+            className="mt-12 max-w-xl border-l border-ink/12 pl-5 text-[0.875rem] leading-relaxed text-dim"
           >
             {hero.supporting}
           </motion.p>

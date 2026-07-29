@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react'
-import { EASE, VIEWPORT, fadeUp, stagger } from '@/lib/motion'
+import { VIEWPORT, fadeUp, stagger } from '@/lib/motion'
 import { company, footer } from '@/content/site'
 import { Logo } from '@/components/ui/Logo'
 import { ArrowGlyph } from '@/components/ui/ArrowGlyph'
@@ -56,7 +56,7 @@ export function Footer() {
               className="w-[13rem] md:w-[15rem]"
             />
 
-            <p className="max-w-sm text-[1.0625rem] leading-relaxed text-mist">
+            <p className="max-w-sm text-[1rem] leading-relaxed text-mist">
               {footer.blurb}
             </p>
 
@@ -93,7 +93,7 @@ export function Footer() {
                     <li key={link.href}>
                       <a
                         href={link.href}
-                        className="group inline-flex items-start gap-2 text-[0.9375rem] leading-snug text-mist transition-colors duration-300 hover:text-chalk"
+                        className="group inline-flex items-start gap-2 text-[0.875rem] leading-snug text-mist transition-colors duration-300 hover:text-chalk"
                       >
                         <ArrowGlyph className="mt-[0.4em] size-2 shrink-0 -rotate-45 text-dim transition-all duration-400 group-hover:translate-x-0.5 group-hover:text-accent" />
                         <span>{link.label}</span>
@@ -106,22 +106,9 @@ export function Footer() {
           </motion.div>
         </motion.div>
 
-        {/* Oversized slogan — the visual philosophy, stated once, large. */}
-        <div className="relative mt-20 md:mt-28">
-          <div className="g-rule mb-10" />
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={VIEWPORT}
-            transition={{ duration: 1.2, ease: EASE.expo }}
-            className="g-gradient-text text-center text-[clamp(2.75rem,13vw,12rem)] leading-[0.85] font-black tracking-[-0.05em] uppercase"
-          >
-            Defy Limits
-          </motion.h2>
-        </div>
-
-        {/* Legal bar */}
-        <div className="mt-14 flex flex-col items-center justify-between gap-5 border-t border-ink/8 py-8 md:flex-row md:py-9">
+        {/* Legal bar. The slogan already appears in the lockup directly above,
+            so the oversized repeat of it was removed rather than resized. */}
+        <div className="mt-20 flex flex-col items-center justify-between gap-5 border-t border-ink/8 py-8 md:mt-24 md:flex-row md:py-9">
           <p className="text-center text-[0.8125rem] text-dim md:text-left">
             © {year} {company.name}. All rights reserved.
           </p>
@@ -163,7 +150,7 @@ function FooterContact({ icon: Icon, href, label, external }) {
     <a
       href={href}
       {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-      className="group flex items-start gap-3 text-[0.9375rem] leading-snug text-mist transition-colors duration-300 hover:text-chalk"
+      className="group flex items-start gap-3 text-[0.875rem] leading-snug text-mist transition-colors duration-300 hover:text-chalk"
     >
       <span className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full border border-ink/10 transition-colors duration-300 group-hover:border-brand-pink/50">
         <Icon className="size-3.5" strokeWidth={2.2} aria-hidden="true" />

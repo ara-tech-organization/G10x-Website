@@ -29,7 +29,7 @@ export function Faq() {
             <span className="g-gradient-text">Questions (FAQs)</span>
           </SectionTitle>
 
-          <p className="mt-7 max-w-sm text-[1.0625rem] leading-relaxed text-mist">
+          <p className="mt-7 max-w-sm text-[1rem] leading-relaxed text-mist">
             Still unsure about something? A short call answers more than a page
             of copy ever will.
           </p>
@@ -88,7 +88,7 @@ export function Faq() {
 
                     <span
                       className={cn(
-                        'flex-1 text-[1.0625rem] leading-snug font-bold tracking-[-0.02em] transition-colors duration-400 md:text-[1.1875rem]',
+                        'flex-1 text-[1rem] leading-snug font-bold tracking-[-0.02em] transition-colors duration-400 md:text-[1.125rem]',
                         open
                           ? 'g-gradient-text'
                           : 'text-chalk/85 group-hover:text-chalk',
@@ -123,7 +123,7 @@ export function Faq() {
                       transition={{ duration: 0.55, ease: EASE.expo }}
                       className="overflow-hidden"
                     >
-                      <p className="pr-12 pb-8 pl-[3.25rem] text-[1rem] leading-relaxed text-mist">
+                      <p className="pr-12 pb-8 pl-[3.25rem] text-[0.9375rem] leading-relaxed text-mist">
                         {item.a}
                       </p>
                     </motion.div>

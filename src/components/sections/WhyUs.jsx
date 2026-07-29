@@ -45,7 +45,7 @@ export function WhyUs() {
               <span className="g-gradient-text">Choosing G10X?</span>
             </SectionTitle>
           </div>
-          <RevealText className="max-w-sm text-[0.9375rem] leading-relaxed text-mist lg:pb-3">
+          <RevealText className="max-w-sm text-[0.875rem] leading-relaxed text-mist lg:pb-3">
             {whyUs.intro}
           </RevealText>
         </div>
@@ -124,11 +124,11 @@ function SpecTile({ item, index }) {
               className="g-gradient relative h-[2px] w-8 origin-left rounded-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-150"
             />
 
-            <h3 className="relative mt-7 text-[1.3125rem] leading-tight font-bold tracking-[-0.025em] text-chalk md:text-[1.4375rem]">
+            <h3 className="relative mt-7 text-[1.125rem] leading-tight font-bold tracking-[-0.025em] text-chalk md:text-[1.1875rem]">
               {item.title}
             </h3>
 
-            <p className="relative mt-3.5 text-[0.9375rem] leading-relaxed text-mist">
+            <p className="relative mt-3.5 text-[0.875rem] leading-relaxed text-mist">
               {item.body}
             </p>
 

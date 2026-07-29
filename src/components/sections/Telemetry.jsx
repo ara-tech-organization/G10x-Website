@@ -40,7 +40,7 @@ export function Telemetry() {
               <span className="g-gradient-text">Stand Behind</span>
             </SectionTitle>
           </div>
-          <RevealText className="max-w-md text-[0.9375rem] leading-relaxed text-mist lg:pb-3">
+          <RevealText className="max-w-md text-[0.875rem] leading-relaxed text-mist lg:pb-3">
             {telemetry.note}
           </RevealText>
         </div>
@@ -169,7 +169,7 @@ function Gauge({ gauge, index }) {
             <span
               className={cn(
                 'g-gradient-text leading-none font-black tracking-[-0.04em] tabular-nums',
-                gauge.to != null ? 'text-[1.875rem]' : 'text-[2.875rem]',
+                gauge.to != null ? 'text-[1.6875rem]' : 'text-[2.5rem]',
               )}
             >
               {inView ? (
@@ -208,7 +208,7 @@ function Gauge({ gauge, index }) {
         </div>
 
         {/* ---- Label ------------------------------------------------- */}
-        <h3 className="mt-6 text-[1.0625rem] leading-snug font-bold tracking-[-0.02em] text-balance text-chalk">
+        <h3 className="mt-6 text-[1rem] leading-snug font-bold tracking-[-0.02em] text-balance text-chalk">
           {gauge.label}
         </h3>
 

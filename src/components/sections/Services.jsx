@@ -89,7 +89,9 @@ function ServiceRow({ service, active, compact, onActivate }) {
         onFocus={onActivate}
         onClick={onActivate}
         aria-expanded={compact ? active : undefined}
-        className="group relative flex w-full items-center gap-5 py-6 text-left md:gap-7 md:py-7"
+        // Left padding keeps the index clear of the 2px active rail, which
+        // otherwise sits on top of the leading zero.
+        className="group relative flex w-full items-center gap-5 py-6 pl-4 text-left md:gap-7 md:py-7 md:pl-5"
       >
         {/* Light beam that sweeps in from the left edge on activation. */}
         <span
@@ -120,7 +122,7 @@ function ServiceRow({ service, active, compact, onActivate }) {
         <span className="relative flex-1">
           <span
             className={cn(
-              'block text-[1.375rem] leading-tight font-bold tracking-[-0.025em] transition-colors duration-400 md:text-[1.75rem]',
+              'block text-[1.125rem] leading-tight font-bold tracking-[-0.025em] transition-colors duration-400 md:text-[1.375rem]',
               active ? 'text-chalk' : 'text-mist group-hover:text-chalk',
             )}
           >
@@ -137,7 +139,7 @@ function ServiceRow({ service, active, compact, onActivate }) {
                 transition={{ duration: 0.55, ease: EASE.expo }}
                 className="block overflow-hidden"
               >
-                <span className="block pt-3.5 text-[0.9375rem] leading-relaxed text-mist">
+                <span className="block pt-3.5 text-[0.875rem] leading-relaxed text-mist">
                   {service.body}
                 </span>
                 <span className="mt-4 flex flex-wrap gap-2">
@@ -191,11 +193,11 @@ function Readout({ service }) {
         >
           <span className="g-label text-accent">{service.abbr}</span>
 
-          <h3 className="mt-4 text-[1.75rem] leading-[1.1] font-bold tracking-[-0.03em] text-chalk">
+          <h3 className="mt-4 text-[1.3125rem] leading-[1.1] font-bold tracking-[-0.03em] text-chalk">
             {service.title}
           </h3>
 
-          <p className="mt-5 text-[1.0625rem] leading-relaxed text-mist">
+          <p className="mt-5 text-[1rem] leading-relaxed text-mist">
             {service.body}
           </p>
 
@@ -221,7 +223,7 @@ function Readout({ service }) {
 
           <a
             href={service.cta.href}
-            className="group mt-9 inline-flex items-center gap-2.5 text-[0.9375rem] font-semibold text-chalk"
+            className="group mt-9 inline-flex items-center gap-2.5 text-[0.875rem] font-semibold text-chalk"
           >
             <span className="relative">
               {service.cta.label}
