@@ -52,7 +52,7 @@ export function Toolstack() {
           whileInView="show"
           viewport={VIEWPORT}
           variants={stagger(0.06)}
-          className="mt-16 grid gap-px overflow-hidden rounded-3xl border border-ink/8 bg-ink/[0.06] sm:grid-cols-2 lg:mt-20 lg:grid-cols-4"
+          className="mt-16 grid gap-px overflow-hidden rounded-3xl border border-ink/8 bg-ink/[0.06] xs:grid-cols-2 lg:mt-20 lg:grid-cols-4"
         >
           {tools.items.map((tool, i) => (
             <ToolCell key={tool.name} tool={tool} index={i} />

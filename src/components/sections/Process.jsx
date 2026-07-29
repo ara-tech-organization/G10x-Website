@@ -283,7 +283,7 @@ function Destination() {
           ))}
         </span>
 
-        <h3 className="text-[1.5625rem] leading-[0.95] font-black tracking-[-0.04em] text-chalk">
+        <h3 className="text-[1.5625rem] leading-[1.08] font-black sm:leading-[0.95] tracking-[-0.04em] text-chalk">
           Growth that <span className="g-gradient-text">compounds.</span>
         </h3>
         <p className="max-w-xs text-[0.875rem] leading-relaxed text-mist">

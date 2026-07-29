@@ -28,12 +28,17 @@ export function Services() {
       labelledBy="services-heading"
       className="relative"
     >
-      {/* Console backlight. */}
+      {/* Console backlight.
+
+          Clipped by its own wrapper, not by the section: the glow sits 160px
+          past the right edge and was widening the whole document at narrow
+          viewports. The section itself must stay unclipped, because the readout
+          panel is `lg:sticky` and any clipping ancestor kills the pin. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-1/3 -right-40 size-[38rem] opacity-[0.07] blur-[120px]"
+        className="pointer-events-none absolute inset-0 overflow-hidden"
       >
-        <div className="g-gradient size-full rounded-full" />
+        <div className="g-gradient absolute top-1/3 -right-40 size-[38rem] rounded-full opacity-[0.07] blur-[120px]" />
       </div>
 
       <div className="relative">

@@ -55,7 +55,7 @@ export function WhyUs() {
           whileInView="show"
           viewport={VIEWPORT}
           variants={stagger(0.07)}
-          className="g-perspective mt-16 grid gap-4 sm:grid-cols-2 lg:mt-20 lg:grid-cols-3"
+          className="g-perspective mt-16 grid gap-4 xs:grid-cols-2 lg:mt-20 lg:grid-cols-3"
         >
           {whyUs.items.map((item, i) => (
             <SpecTile key={item.title} item={item} index={i} />

@@ -83,7 +83,7 @@ export function Footer() {
           {/* Sitemap */}
           <motion.div
             variants={fadeUp}
-            className="grid gap-10 sm:grid-cols-3 sm:gap-8"
+            className="grid gap-10 xs:grid-cols-2 sm:grid-cols-3 sm:gap-8"
           >
             {footer.columns.map((col) => (
               <nav key={col.title} aria-label={col.title}>

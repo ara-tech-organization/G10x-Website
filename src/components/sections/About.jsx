@@ -30,9 +30,13 @@ export function About() {
 
   return (
     <SectionShell id="about" labelledBy="about-heading" className="pt-28 md:pt-36">
-      <div className="grid gap-16 lg:grid-cols-[1fr_1.05fr] lg:gap-20">
+      {/* `min-w-0` on both columns: grid items default to `min-width: auto`,
+          so the widest child's min-content can push the track past the
+          container. At 320px the route column's 4rem left inset did exactly
+          that and widened the whole section by 30px. */}
+      <div className="grid gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-20">
         {/* ---- Story column (sticky) ---------------------------------- */}
-        <div className="lg:sticky lg:top-32 lg:self-start">
+        <div className="min-w-0 lg:sticky lg:top-32 lg:self-start">
           <Eyebrow>{about.eyebrow}</Eyebrow>
 
           <SectionTitle id="about-heading" className="mt-7">
@@ -86,7 +90,7 @@ export function About() {
         </div>
 
         {/* ---- The route --------------------------------------------- */}
-        <div ref={trackRef} className="relative">
+        <div ref={trackRef} className="relative min-w-0">
           <Highway progress={progress} />
 
           <motion.ul

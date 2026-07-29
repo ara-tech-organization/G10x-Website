@@ -78,7 +78,7 @@ export function SectionTitle({ children, id, className, size = 'display' }) {
     <h2
       id={id}
       className={cn(
-        'font-extrabold leading-[0.95] text-balance',
+        'font-extrabold leading-[1.1] text-balance sm:leading-[1.02] lg:leading-[0.95]',
         sizes[size],
         className,
       )}

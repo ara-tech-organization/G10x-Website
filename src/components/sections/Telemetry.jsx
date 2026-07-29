@@ -50,7 +50,7 @@ export function Telemetry() {
           whileInView="show"
           viewport={VIEWPORT}
           variants={stagger(0.11)}
-          className="mt-16 grid gap-4 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4 lg:gap-5"
+          className="mt-16 grid gap-4 xs:grid-cols-2 lg:mt-20 lg:grid-cols-4 lg:gap-5"
         >
           {telemetry.gauges.map((gauge, i) => (
             <Gauge key={gauge.label} gauge={gauge} index={i} />

@@ -162,7 +162,7 @@ export function Hero() {
           {/* H1 — per-word rise out of a clipping mask. */}
           <h1
             id="hero-heading"
-            className="text-hero font-black leading-[0.88] tracking-[-0.045em]"
+            className="text-hero font-black leading-[1.02] tracking-[-0.045em] sm:leading-[0.94] lg:leading-[0.88]"
           >
             {hero.headline.map((line, li) => (
               <span key={line} className="block overflow-hidden pb-[0.06em]">

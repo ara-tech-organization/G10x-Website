@@ -198,6 +198,31 @@ lands.
 
 ---
 
+## Responsive
+
+Verified with zero horizontal overflow at 320, 360, 390, 480, 640, 768, 1024,
+1280, 1440 and 1920px.
+
+An `xs` breakpoint (30rem / 480px) is added in `@theme`, because Tailwind ships
+nothing below `sm` and that left the whole 480–640px band sharing a layout with
+a 320px screen. Telemetry, Why Us, Toolstack, the footer sitemap and the contact
+form all pair up at `xs` rather than waiting for `sm`.
+
+Two overflow traps worth knowing about, both fixed and both easy to reintroduce:
+
+- **Decorative glows escape their section.** The Services backlight sits 160px
+  past the right edge (`-right-40`) and was widening the entire document at
+  narrow viewports. It cannot be fixed by clipping the section — that section's
+  readout panel is `lg:sticky`, and any clipping ancestor kills the pin — so the
+  glow gets its own `overflow-hidden` wrapper. Same pattern in Work.
+- **Grid items default to `min-width: auto`.** In About, the route column's 4rem
+  left inset pushed the single-column track 30px past its container at 320px.
+  Both columns now carry `min-w-0` and the `lg` template uses `minmax(0, 1fr)`.
+
+The pinned sections (Process, Work) and the two-pane ones (Services,
+Testimonials) all fall back to stacked layouts below `lg` via `useIsTablet`,
+and the pinned ones also unpin under `prefers-reduced-motion`.
+
 ## Accessibility & performance
 
 - Reduced motion is honoured throughout: Lenis does not initialise, the 3D scene

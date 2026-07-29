@@ -214,7 +214,7 @@ function EnquiryForm() {
         </p>
 
         <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-4">
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-4 xs:grid-cols-2">
             <Field label="Your name" name="name" required autoComplete="name" />
             <Field
               label="Phone"
@@ -385,7 +385,7 @@ function FinalCta() {
 
       <div className="relative flex flex-col items-start gap-9 p-9 md:p-14 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
         <div className="max-w-2xl">
-          <h3 className="text-[clamp(1.375rem,2.75vw,2.25rem)] leading-[1.02] font-black tracking-[-0.04em] text-chalk">
+          <h3 className="text-[clamp(1.375rem,2.75vw,2.25rem)] leading-[1.14] font-black tracking-[-0.04em] text-chalk sm:leading-[1.02]">
             {contact.finalHeading}
           </h3>
           <p className="mt-5 max-w-xl text-lead leading-relaxed text-chalk/70">

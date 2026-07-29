@@ -143,6 +143,12 @@
   --text-title: clamp(1.5rem, 2.6vw, 2.375rem);
   --text-lead: clamp(1rem, 1.209vw, 1.25rem);
 
+  /* ---- Breakpoints -----------------------------------------------------
+     Tailwind ships sm/md/lg/xl/2xl but nothing below 40rem, which leaves the
+     whole 480–640px band (large phones, small phones in landscape) sharing a
+     layout with a 320px screen. `xs` fills that gap. */
+  --breakpoint-xs: 30rem;
+
   /* ---- Motion --------------------------------------------------------- */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
@@ -230,6 +236,27 @@
   --grid-line: rgba(10, 16, 36, 0.55);
   --dial-track: rgba(10, 16, 36, 0.12);
   --dial-tick: rgba(10, 16, 36, 0.24);
+}
+
+/* ---------------------------------------------------------------------------
+   Phone line-height.
+
+   Leading that reads as confident on a wide column is cramped on a 390px one:
+   the measure is short, so lines are stacked closer together relative to their
+   length, and the type is smaller so the gaps shrink with it.
+
+   Tailwind's `leading-tight/snug/relaxed` utilities resolve to these custom
+   properties, so re-declaring them inside the media query re-leads every one of
+   the ~43 call sites at once. Arbitrary values like `leading-[0.88]` are
+   literals and cannot be reached this way — those are set responsively at their
+   own call sites (the hero h1 and the section headings).
+   --------------------------------------------------------------------------- */
+@media (width < 40rem) {
+  :root {
+    --leading-tight: 1.34;
+    --leading-snug: 1.46;
+    --leading-relaxed: 1.72;
+  }
 }
 
 @layer base {
