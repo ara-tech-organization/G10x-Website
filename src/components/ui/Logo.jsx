@@ -73,7 +73,7 @@ export function LogoLink({ className, imgClassName, variant = 'light' }) {
       <Logo
         variant={variant}
         priority
-        sizes="(max-width: 768px) 136px, 160px"
+        sizes="(max-width: 768px) 116px, 128px"
         className={cn(
           'transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]',
           imgClassName,

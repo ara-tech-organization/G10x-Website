@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { EASE } from '@/lib/motion'
 import { Logo } from '@/components/ui/Logo'
 import { useTheme } from '@/hooks/useTheme'
@@ -14,17 +14,35 @@ import { useTheme } from '@/hooks/useTheme'
  * Progress is driven by real readiness (fonts + window load), not a fake timer,
  * with a floor so the sequence never flashes and a ceiling so a slow asset
  * can never trap the visitor behind it.
+ *
+ * The hand-off is a timed phase machine rather than AnimatePresence's
+ * `onExitComplete`. That callback only fires once every exiting child reports
+ * completion, and the parent's exit carried a transition with no animatable
+ * value — so on some renders nothing ever reported, the curtain stayed up and
+ * the page underneath was left permanently scroll-locked. A phase the component
+ * owns cannot get stuck: the timer runs whether or not the animation does.
  */
 const MIN_DURATION = 1900
 const MAX_DURATION = 5000
+// Curtain travel (1.1s) plus its 0.08s delay, rounded up.
+const EXIT_DURATION = 1250
 
 export function Preloader({ onComplete }) {
   const reduceMotion = useReducedMotion()
   const { isLight } = useTheme()
   const [progress, setProgress] = useState(0)
-  const [done, setDone] = useState(false)
+  // 'loading' → 'exiting' → 'gone'. Never reverses.
+  const [phase, setPhase] = useState('loading')
+  const done = phase !== 'loading'
   // Stamped in the effect, not during render — render must stay pure.
   const startedAt = useRef(0)
+  // Held in a ref so the release timer never re-runs just because the parent
+  // handed down a new function identity. Assigned in an effect, never during
+  // render.
+  const onCompleteRef = useRef(onComplete)
+  useEffect(() => {
+    onCompleteRef.current = onComplete
+  }, [onComplete])
 
   useEffect(() => {
     startedAt.current = Date.now()
@@ -72,28 +90,38 @@ export function Preloader({ onComplete }) {
     if (!startedAt.current) return
     if (progress < 0.995) return
     if (Date.now() - startedAt.current < MIN_DURATION) return
-    const t = setTimeout(() => setDone(true), reduceMotion ? 0 : 260)
+    if (phase !== 'loading') return
+    const t = setTimeout(() => setPhase('exiting'), reduceMotion ? 0 : 260)
     return () => clearTimeout(t)
-  }, [progress, reduceMotion])
+  }, [progress, reduceMotion, phase])
 
-  const release = () => {
-    document.documentElement.classList.remove('lenis-stopped')
-    document.body.style.overflow = ''
-    onComplete?.()
-  }
+  // Unmount on a timer the component controls, so a stalled animation can
+  // never strand the curtain over the page.
+  useEffect(() => {
+    if (phase !== 'exiting') return
+    const t = setTimeout(
+      () => {
+        setPhase('gone')
+        document.documentElement.classList.remove('lenis-stopped')
+        document.body.style.overflow = ''
+        onCompleteRef.current?.()
+      },
+      reduceMotion ? 260 : EXIT_DURATION,
+    )
+    return () => clearTimeout(t)
+  }, [phase, reduceMotion])
 
   const pct = Math.round(progress * 100)
 
   return (
-    <AnimatePresence onExitComplete={release}>
-      {!done && (
+    <>
+      {phase !== 'gone' && (
         <motion.div
           className="g-noise fixed inset-0 z-[200] flex items-center justify-center overflow-hidden bg-abyss"
-          exit={
-            reduceMotion
-              ? { opacity: 0, transition: { duration: 0.25 } }
-              : { transition: { duration: 0.1 } }
+          animate={
+            reduceMotion && done ? { opacity: 0 } : { opacity: 1 }
           }
+          transition={{ duration: 0.25 }}
         >
           {/* Curtain halves that pull apart on exit. */}
           {!reduceMotion &&
@@ -103,10 +131,8 @@ export function Preloader({ onComplete }) {
                 aria-hidden="true"
                 className="absolute inset-x-0 h-1/2 bg-abyss"
                 style={{ [half === 0 ? 'top' : 'bottom']: 0 }}
-                exit={{
-                  y: half === 0 ? '-101%' : '101%',
-                  transition: { duration: 1.1, ease: EASE.quint, delay: 0.08 },
-                }}
+                animate={{ y: done ? (half === 0 ? '-101%' : '101%') : '0%' }}
+                transition={{ duration: 1.1, ease: EASE.quint, delay: 0.08 }}
               />
             ))}
 
@@ -250,6 +276,6 @@ export function Preloader({ onComplete }) {
           </motion.p>
         </motion.div>
       )}
-    </AnimatePresence>
+    </>
   )
 }

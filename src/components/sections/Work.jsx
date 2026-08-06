@@ -161,7 +161,9 @@ function PinnedShowcase({ trackRef, active, total }) {
               transition={{ duration: 0.6, ease: EASE.expo }}
               className="absolute inset-0 flex flex-col justify-center"
               // Inert copy must not be reachable by keyboard or screen reader.
-              inert={i !== active ? '' : undefined}
+              // React 19 takes `inert` as a real boolean; the old empty-string
+              // form logs a warning and is treated as false.
+              inert={i !== active}
             >
               <Brief item={item} index={i} total={total} />
             </motion.article>

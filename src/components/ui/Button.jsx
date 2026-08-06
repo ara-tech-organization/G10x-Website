@@ -1,15 +1,21 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { useMagnetic } from '@/hooks/useMagnetic'
 import { scrollToTarget } from '@/hooks/useLenis'
 
+const MotionLink = motion.create(Link)
+
 /**
- * The page's only button. Three visual weights, one behaviour:
- * it leans toward the cursor, and a light sweep crosses it on hover.
+ * The site's only button. Three visual weights, one behaviour: it leans toward
+ * the cursor, and a light sweep crosses it on hover.
  *
- * Renders as <a> when `href` is present, <button> otherwise, so semantics
- * always match intent.
+ * The element follows the destination, so semantics always match intent:
+ *   no href            → <button>
+ *   "#anchor"          → <a>, smooth-scrolled through Lenis
+ *   "http(s)://…"      → <a target="_blank">
+ *   "/route"           → react-router <Link>, so it never reloads the document
  */
 export function Button({
   children,
@@ -25,10 +31,13 @@ export function Button({
     strength: variant === 'primary' ? 10 : 7,
   })
 
-  const isInternalHash = href?.startsWith('#')
+  const isHash = href?.startsWith('#')
+  const isExternal =
+    href?.startsWith('http') || href?.startsWith('mailto:') || href?.startsWith('tel:')
+  const isRoute = Boolean(href) && !isHash && !isExternal
 
   const handleClick = (e) => {
-    if (isInternalHash) {
+    if (isHash) {
       e.preventDefault()
       scrollToTarget(href)
     }
@@ -49,12 +58,12 @@ export function Button({
     ghost: 'text-mist hover:text-chalk',
   }
 
-  const Tag = href ? motion.a : motion.button
+  const Tag = isRoute ? MotionLink : href ? motion.a : motion.button
 
   return (
     <Tag
       ref={ref}
-      href={href}
+      {...(isRoute ? { to: href } : href ? { href } : {})}
       onClick={handleClick}
       onPointerMove={onPointerMove}
       onPointerLeave={onPointerLeave}
@@ -68,7 +77,7 @@ export function Button({
         variants[variant],
         className,
       )}
-      {...(href && !isInternalHash && href.startsWith('http')
+      {...(href?.startsWith('http')
         ? { target: '_blank', rel: 'noopener noreferrer' }
         : {})}
       {...rest}

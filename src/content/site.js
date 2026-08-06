@@ -97,7 +97,9 @@ export const nav = [
 export const hero = {
   eyebrow: 'Digital Marketing Company · Thanjavur',
   // "Digital Growth, Built for Your Business!" — split for the display treatment.
-  headline: ['Digital Growth,', 'Built for Your', 'Business'],
+  // The document's H1 is "Digital Growth, Built for Your Business!" — split
+  // across three lines for the display treatment, exclamation mark included.
+  headline: ['Digital Growth,', 'Built for Your', 'Business!'],
   accentWordIndex: 2,
   sub: 'G10X Private Limited blends strategy, creativity and technology to help brands get found online, win more customers and grow with confidence — without the guesswork, making us the best digital marketing company in Thanjavur for businesses ready to grow online.',
   supporting:
@@ -517,7 +519,7 @@ export const faq = {
     },
     {
       q: 'Does G10X only work with businesses located in Thanjavur?',
-      a: 'Our office is based in Srinivasapuram, Thanjavur, and we serve businesses across the district and beyond — including remote clients who prefer calls and video updates.',
+      a: 'Our office is based in Srinivasapuram, Thanjavur, and we serve businesses across the district and beyond, including remote clients who prefer calls and video updates.',
     },
     {
       q: 'What makes G10X different from other agencies in Thanjavur?',

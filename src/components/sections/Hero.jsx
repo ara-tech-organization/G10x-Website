@@ -28,6 +28,10 @@ const HeroScene = lazy(() => import('@/components/three/HeroScene'))
  * and the headline drifts back into it. Scroll velocity is written into a plain
  * ref rather than React state so the 3D scene can read it every frame without
  * ever triggering a re-render.
+ *
+ * The corridor is the home page's own canvas, mounted here and torn down when
+ * you leave — the G10X particle stage belongs to Services alone, so the two
+ * scenes never share a page or a frame budget.
  */
 export function Hero() {
   const rootRef = useRef(null)
@@ -77,7 +81,7 @@ export function Hero() {
 
   // Defer the 3D download until the browser is idle.
   useEffect(() => {
-    if (reduceMotion) return
+    if (reduceMotion) return undefined
     const schedule = window.requestIdleCallback ?? ((cb) => setTimeout(cb, 220))
     const id = schedule(() => setSceneReady(true))
     return () => window.cancelIdleCallback?.(id)
@@ -210,6 +214,12 @@ export function Hero() {
             <Button href={hero.callCta.href} variant="outline" size="lg" icon={false}>
               {hero.callCta.label}
             </Button>
+            {/* The document's "Secondary CTA: Start Today | Form". Kept as the
+                lightest of the three so it reads as a third option rather than
+                competing with the two primary actions. */}
+            <Button href={hero.secondaryCta.href} variant="ghost" size="lg">
+              {hero.secondaryCta.label}
+            </Button>
           </motion.div>
 
           {/* Supporting line, set quieter and narrower. */}
@@ -275,7 +285,7 @@ export function Hero() {
  */
 function StaticBackdrop() {
   return (
-    <div className="absolute inset-0 overflow-hidden bg-void">
+    <div className="absolute inset-0 overflow-hidden">
       {/* Vanishing-point bloom. */}
       <div className="absolute top-1/2 left-[62%] size-[46rem] -translate-x-1/2 -translate-y-1/2 opacity-[0.22] blur-[130px]">
         <div className="g-gradient size-full rounded-full" />

@@ -178,6 +178,14 @@ function Channel({ item, index, total, open, compact, reduceMotion, onOpen }) {
               />
             ))}
           </span>
+
+          {/* A collapsed channel renders only its spine, so without this the
+              other two quotes are absent from the document entirely — search
+              engines and screen readers would only ever meet one of the three.
+              The button already announces itself; this gives it its content. */}
+          <span className="sr-only">
+            “{item.quote}” — {item.name}, {item.role}
+          </span>
         </button>
       )}
 

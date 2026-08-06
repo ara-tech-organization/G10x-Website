@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import { Home } from '@/pages/Home'
+import { Services } from '@/pages/Services'
+import { PageStub } from '@/pages/PageStub'
+import { allRoutes } from '@/content/navigation'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Preloader } from '@/components/layout/Preloader'
@@ -10,6 +13,7 @@ import { PageTransition } from '@/components/layout/PageTransition'
 import { ThemeProvider } from '@/components/layout/ThemeProvider'
 import { CursorGlow } from '@/components/ui/CursorGlow'
 import { ScrollProgress } from '@/components/ui/ScrollProgress'
+import { StageCanvas } from '@/components/layout/StageCanvas'
 import { useLenis } from '@/hooks/useLenis'
 
 export default function App() {
@@ -42,18 +46,39 @@ export default function App() {
 
       <Preloader onComplete={() => setBooted(true)} />
 
+      {/* One WebGL scene for the whole visit, behind everything. Mounted here
+          rather than inside a page so it survives route changes. */}
+      <StageCanvas />
+
       <ScrollProgress />
       <CursorGlow />
       <Header />
 
-      <main id="main">
+      <main id="main" className="relative z-10">
         <AnimatePresence mode="wait" initial={false}>
           <PageTransition key={location.pathname}>
+            {/* Routes are generated from the page structure in
+                content/navigation.js, so the router, the header menu and the
+                footer sitemap are all driven by one list and cannot drift.
+                Only Home is built; the rest resolve to a stub that names the
+                page and offers a way through, rather than silently rendering
+                Home under a URL that promises something else. */}
             <Routes location={location}>
               <Route path="/" element={<Home />} />
-              {/* The remaining routes ship with their own pages; until then an
-                  unknown path renders Home rather than a dead end. */}
-              <Route path="*" element={<Home />} />
+              <Route path="/services" element={<Services />} />
+              {allRoutes
+                .filter((r) => r.href !== '/' && r.href !== '/services')
+                .map((r) => (
+                  <Route
+                    key={r.href}
+                    path={r.href}
+                    element={<PageStub title={r.title} label={r.label} />}
+                  />
+                ))}
+              <Route
+                path="*"
+                element={<PageStub title="Page not found" label="404" />}
+              />
             </Routes>
           </PageTransition>
         </AnimatePresence>

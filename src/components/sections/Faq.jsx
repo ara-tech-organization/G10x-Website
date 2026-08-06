@@ -129,6 +129,13 @@ export function Faq() {
                     </motion.div>
                   )}
                 </AnimatePresence>
+
+                {/* A collapsed panel is unmounted, so four of the five answers
+                    would be absent from the document. The FAQPage schema
+                    declares all five, and Google expects schema content to be
+                    present on the page — this keeps the answer in the DOM for
+                    crawlers without showing it twice when the panel opens. */}
+                {!open && <p className="sr-only">{item.a}</p>}
               </motion.div>
             )
           })}

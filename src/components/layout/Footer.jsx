@@ -1,23 +1,65 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react'
 import { VIEWPORT, fadeUp, stagger } from '@/lib/motion'
 import { company, footer } from '@/content/site'
+import {
+  legalNav,
+  primaryNav,
+  serviceGroups,
+  utilityNav,
+} from '@/content/navigation'
+
+/**
+ * Footer sitemap, derived from the same tree as the header menu.
+ *
+ * "Services" lists the pages a visitor can actually open — the group headings
+ * that have no page of their own (Digital Marketing, Application Development)
+ * are structural, so they are flattened out here rather than shown as text a
+ * visitor might try to click.
+ */
+const footerColumns = [
+  {
+    title: 'Services',
+    links: serviceGroups.flatMap((group) =>
+      group.href
+        ? [{ label: group.label, href: group.href }]
+        : (group.items ?? []).map((i) => ({ label: i.label, href: i.href })),
+    ),
+  },
+  {
+    title: 'Company',
+    links: [
+      ...primaryNav.filter((i) => i.href !== '/'),
+      ...utilityNav,
+    ].map((i) => ({ label: i.label, href: i.href })),
+  },
+  { title: 'Legal', links: legalNav },
+]
 import { Logo } from '@/components/ui/Logo'
 import { ArrowGlyph } from '@/components/ui/ArrowGlyph'
 import { scrollToTarget } from '@/hooks/useLenis'
-import { useTheme } from '@/hooks/useTheme'
 
 /**
- * The end of the road. An oversized wordmark sits behind the sitemap and the
- * horizon glow rises from the bottom edge — the journey decelerating rather
- * than simply stopping.
+ * The end of the road. The horizon glow rises from the bottom edge — the
+ * journey decelerating rather than simply stopping.
+ *
+ * Pinned dark in both themes via `data-theme="dark"` on the element itself.
+ * The theme blocks in index.css are attribute selectors, so scoping one to a
+ * subtree re-declares every surface, text and ink token beneath it — the
+ * footer keeps this ground, and everything inside it (hairlines, the receding
+ * grid, the muted link colours) follows automatically rather than needing a
+ * per-element override. It reads as brand furniture closing the page, the same
+ * way the ignition curtain opens it.
  */
 export function Footer() {
-  const { isLight } = useTheme()
   const year = new Date().getFullYear()
 
   return (
-    <footer className="g-noise relative overflow-hidden border-t border-ink/8 bg-abyss">
+    <footer
+      data-theme="dark"
+      className="g-noise relative overflow-hidden border-t border-ink/8 bg-abyss"
+    >
       {/* Horizon: the last light of the tunnel. */}
       <div
         aria-hidden="true"
@@ -51,10 +93,9 @@ export function Footer() {
         >
           {/* Brand column — the supplied footer lockup. */}
           <motion.div variants={fadeUp} className="flex flex-col gap-7">
-            <Logo
-              variant={isLight ? 'dark' : 'light'}
-              className="w-[13rem] md:w-[15rem]"
-            />
+            {/* Always the light-on-dark lockup: the ground here no longer
+                inverts, so the navy wordmark would disappear into it. */}
+            <Logo variant="light" className="w-[13rem] md:w-[15rem]" />
 
             <p className="max-w-sm text-[1rem] leading-relaxed text-mist">
               {footer.blurb}
@@ -80,24 +121,25 @@ export function Footer() {
             </div>
           </motion.div>
 
-          {/* Sitemap */}
+          {/* Sitemap — the same tree the header menu is built from, so the two
+              can never drift apart. */}
           <motion.div
             variants={fadeUp}
             className="grid gap-10 xs:grid-cols-2 sm:grid-cols-3 sm:gap-8"
           >
-            {footer.columns.map((col) => (
+            {footerColumns.map((col) => (
               <nav key={col.title} aria-label={col.title}>
                 <h3 className="g-label mb-6 text-chalk">{col.title}</h3>
                 <ul className="flex flex-col gap-3.5">
                   {col.links.map((link) => (
                     <li key={link.href}>
-                      <a
-                        href={link.href}
+                      <Link
+                        to={link.href}
                         className="group inline-flex items-start gap-2 text-[0.875rem] leading-snug text-mist transition-colors duration-300 hover:text-chalk"
                       >
                         <ArrowGlyph className="mt-[0.4em] size-2 shrink-0 -rotate-45 text-dim transition-all duration-400 group-hover:translate-x-0.5 group-hover:text-accent" />
                         <span>{link.label}</span>
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -114,18 +156,18 @@ export function Footer() {
           </p>
 
           <div className="flex items-center gap-6">
-            <a
-              href="/privacy-policy"
+            <Link
+              to="/privacy-policy"
               className="text-[0.8125rem] text-dim transition-colors hover:text-chalk"
             >
               Privacy
-            </a>
-            <a
-              href="/terms-and-conditions"
+            </Link>
+            <Link
+              to="/terms-and-conditions"
               className="text-[0.8125rem] text-dim transition-colors hover:text-chalk"
             >
               Terms
-            </a>
+            </Link>
             <button
               type="button"
               onClick={() => scrollToTarget('#top', 0)}
